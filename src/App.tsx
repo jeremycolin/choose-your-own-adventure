@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     element: <Page />,
     loader: async function ({ params }): Promise<PageLoaderData> {
       const { text, next } = await import(
-        `../../adventure/alone-against-the-flames/pages/${params.page}.json`
+        `./adventure/alone-against-the-flames/pages/${params.page}.json`
       );
       return {
         text,
