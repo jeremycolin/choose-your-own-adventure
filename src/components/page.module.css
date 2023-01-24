@@ -1,0 +1,15 @@
+.page {
+  background-color: #efe6dd;
+}
+
+.title {
+  font-size: 48px;
+  text-align: center;
+  padding: 40px;
+}
+
+.text {
+  padding: 0 20px;
+  font-size: 22px;
+  text-align: justify;
+}
