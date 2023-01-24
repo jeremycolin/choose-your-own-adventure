@@ -7,6 +7,12 @@ body {
 
 html,
 body,
+div#root {
+  min-height: 100vh;
+}
+
+html,
+body,
 div,
 span,
 applet,
