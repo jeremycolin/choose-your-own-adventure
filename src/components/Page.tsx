@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { Action, Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
@@ -12,7 +12,10 @@ export const Page = () => {
   const navigate = useNavigate();
   const { character, createCharacter } = useCharacter();
 
-  const onChoice = (choice: Choice) => {
+  const onChoice = (choice: Choice) => (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const action = choice.actions.find((action) => {
       if (!action.condition || !character) {
         // if condition is not defined, action is selected
@@ -31,12 +34,18 @@ export const Page = () => {
   };
 
   const onInputChange = (input: "name") => (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (character) {
       character[input] = e.target.value;
     }
   };
 
   const onInputSubmit = (action: Action) => (e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (e.key === "Enter") {
       navigate(`/cthulhu/${action.page}`);
     }
@@ -58,7 +67,7 @@ export const Page = () => {
             key={choice.label}
           />
         ) : (
-          <div className={classes.button} onClick={() => onChoice(choice)} key={choice.label}>
+          <div className={classes.button} onClick={onChoice(choice)} key={choice.label}>
             {choice.label}
           </div>
         )
