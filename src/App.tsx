@@ -10,9 +10,11 @@ const router = createBrowserRouter([
     path: "book/:page",
     element: <Page />,
     loader: async function ({ params }): Promise<PageLoaderData> {
-      const { text, context, next } = await import(
-        `./adventure/alone-against-the-flames/pages/${params.page}.json`
-      );
+      const { text, context, next } = (
+        await import(
+          `./adventure/alone-against-the-flames/pages/${params.page}`
+        )
+      ).default;
       return {
         text,
         context,
