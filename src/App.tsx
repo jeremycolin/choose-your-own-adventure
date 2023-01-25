@@ -11,9 +11,7 @@ const router = createBrowserRouter([
     path: "book/:page",
     element: <Page />,
     loader: async function ({ params }): Promise<PageData> {
-      const { page } = await import(
-        `./adventures/alone-against-the-flames/pages/${params.page}`
-      );
+      const { page } = await import(`./adventures/alone-against-the-flames/pages/${params.page}.ts`);
       return page;
     },
   },
