@@ -37,7 +37,8 @@ export const Page = () => {
   };
 
   const onInputSubmit = (action: Action) => (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code == "Enter") {
+    console.log(e);
+    if (e.keyCode === 13) {
       navigate(`/cthulhu/${action.page}`);
     }
   };
