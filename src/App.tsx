@@ -5,10 +5,10 @@ import { PageData } from "./models/page";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <div>Hello World</div>,
   },
   {
-    path: "book/:page",
+    path: "cthulhu/:page",
     element: <Page />,
     loader: async function ({ params }): Promise<PageData> {
       const { page } = await import(`./adventures/alone-against-the-flames/pages/${params.page}.ts`);
