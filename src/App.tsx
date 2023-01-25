@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Page, PageLoaderData } from "./components/Page";
+import { Page } from "./components/Page";
+import { PageData } from "./models/page";
 
 const router = createBrowserRouter([
   {
@@ -9,17 +10,11 @@ const router = createBrowserRouter([
   {
     path: "book/:page",
     element: <Page />,
-    loader: async function ({ params }): Promise<PageLoaderData> {
-      const { text, context, next } = (
-        await import(
-          `./adventure/alone-against-the-flames/pages/${params.page}`
-        )
-      ).default;
-      return {
-        text,
-        context,
-        next,
-      };
+    loader: async function ({ params }): Promise<PageData> {
+      const { page } = await import(
+        `./adventures/alone-against-the-flames/pages/${params.page}`
+      );
+      return page;
     },
   },
 ]);

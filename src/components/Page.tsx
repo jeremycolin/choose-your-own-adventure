@@ -1,23 +1,34 @@
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { Profession } from "../models/character";
+import { Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
 import { useScrollToTop } from "../utils/use-scroll-to-top";
 import classes from "./page.module.css";
 
-export interface PageLoaderData {
-  text: string;
-  context?: string;
-  next: [{ label: string; page: number; profession?: Profession }];
-}
-
 export const Page = (props: any) => {
   useScrollToTop();
-  const { text, context, next } = useLoaderData() as PageLoaderData;
+  const { text, context, choices } = useLoaderData() as PageData;
   const { page } = useParams();
   const navigate = useNavigate();
   const { character, createCharacter } = useCharacter();
 
-  console.log(character);
+  const onChoice = (choice: Choice) => {
+    const action = choice.actions.find((action) => {
+      if (!action.condition || !character) {
+        // if condition is not defined, action is selected
+        return true;
+      }
+      return action.condition(character);
+    });
+    if (!action) {
+      console.error("Could not find any possible actions, we're stuck here :(");
+      return;
+    }
+    if (action.profession) {
+      createCharacter(action.profession);
+    }
+    navigate(`/book/${action.page}`);
+  };
 
   return (
     <div className={classes.page}>
@@ -26,18 +37,13 @@ export const Page = (props: any) => {
       {context ? (
         <p className={`${classes.text} ${classes.context}`}>{context}</p>
       ) : null}
-      {next.map((action) => (
+      {choices.map((choice) => (
         <div
           className={classes.button}
-          onClick={() => {
-            if (action.profession) {
-              createCharacter(action.profession);
-            }
-            navigate(`/book/${action.page}`);
-          }}
-          key={`${action.label}-${action.page}`}
+          onClick={() => onChoice(choice)}
+          key={choice.label}
         >
-          {action.label}
+          {choice.label}
         </div>
       ))}
     </div>

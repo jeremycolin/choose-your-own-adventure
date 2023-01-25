@@ -1,14 +1,26 @@
 export type Profession = "journalist" | "detective" | "gangster";
 
+const roll = (base = 100) => Math.floor(Math.random() * base) + 1;
+
+const droll =
+  (dice: number) =>
+  (base = 100) =>
+    Array.from({ length: dice }, () => roll(base)).reduce((sum, curr) => sum + curr, 0);
+
+export type Characteristic = "strength" | "constitution" | "power" | "dexterity" | "appearance" | "size" | "intelligence" | "education";
+
 export class Character {
-  private strength: number;
-  private constitution: number;
-  private power: number;
-  private dexterity: number;
-  private appearance: number;
-  private size: number;
-  private intelligence: number;
-  private education: number;
+  public strength: number;
+  public constitution: number;
+  public power: number;
+  public dexterity: number;
+  public appearance: number;
+  public size: number;
+  public intelligence: number;
+  public education: number;
+
+  public hitPoints: number;
+  public luck: number;
 
   constructor({
     strength,
@@ -37,7 +49,16 @@ export class Character {
     this.size = size;
     this.intelligence = intelligence;
     this.education = education;
+
+    this.hitPoints = Math.floor((this.size + this.constitution) / 10);
+    this.luck = droll(3)(6) * 5;
   }
+
+  normalRoll = (characteristic: Characteristic) => roll() <= this[characteristic];
+
+  hardRoll = (characteristic: Characteristic) => roll() <= this[characteristic] / 2;
+
+  extremeRoll = (characteristic: Characteristic) => roll() <= this[characteristic] / 5;
 }
 
 export class Journalist extends Character {
@@ -48,7 +69,7 @@ export class Journalist extends Character {
       power: 60,
       dexterity: 50,
       appearance: 50,
-      size: 50,
+      size: 30,
       intelligence: 70,
       education: 80,
     });
