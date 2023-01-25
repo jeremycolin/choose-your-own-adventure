@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Character,
-  Detective,
-  Gangster,
-  Journalist,
-  Profession,
-} from "./character";
+import { Character, Detective, Gangster, Journalist, Profession } from "./character";
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState<Character>();

@@ -22,6 +22,8 @@ export class Character {
   public hitPoints: number;
   public luck: number;
 
+  public name: string;
+
   constructor({
     strength,
     constitution,
@@ -52,6 +54,8 @@ export class Character {
 
     this.hitPoints = Math.floor((this.size + this.constitution) / 10);
     this.luck = droll(3)(6) * 5;
+
+    this.name = "";
   }
 
   normalRoll = (characteristic: Characteristic) => roll() <= this[characteristic];

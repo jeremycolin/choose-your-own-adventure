@@ -6,15 +6,15 @@ export const page: PageData = {
   choices: [
     {
       label: "I am a journalist",
-      actions: [{ page: 8, profession: "journalist" }],
+      actions: [{ page: "8", profession: "journalist" }],
     },
     {
       label: "I am a detective",
-      actions: [{ page: 8, profession: "detective" }],
+      actions: [{ page: "8", profession: "detective" }],
     },
     {
       label: "I am a gangster",
-      actions: [{ page: 8, profession: "gangster" }],
+      actions: [{ page: "8", profession: "gangster" }],
     },
   ],
 };

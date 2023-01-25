@@ -8,7 +8,7 @@ export const page: PageData = {
       label: "Journey on",
       actions: [
         {
-          page: 71,
+          page: "71",
           effect: (character: Character) => {
             character.hitPoints = character.hitPoints - 1;
           },

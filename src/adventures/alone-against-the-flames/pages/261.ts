@@ -5,7 +5,7 @@ export const page: PageData = {
   choices: [
     {
       label: "Journey on",
-      actions: [{ page: 71 }],
+      actions: [{ page: "71" }],
     },
   ],
 };

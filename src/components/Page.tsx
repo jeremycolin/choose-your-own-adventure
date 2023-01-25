@@ -1,5 +1,6 @@
+import { ChangeEvent, KeyboardEvent } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
-import { Choice, PageData } from "../models/page";
+import { Action, Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
 import { useScrollToTop } from "../utils/use-scroll-to-top";
 import classes from "./page.module.css";
@@ -29,16 +30,39 @@ export const Page = () => {
     navigate(`/cthulhu/${action.page}`);
   };
 
+  const onInputChange = (input: "name") => (e: ChangeEvent<HTMLInputElement>) => {
+    if (character) {
+      character[input] = e.target.value;
+    }
+  };
+
+  const onInputSubmit = (action: Action) => (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code == "Enter") {
+      navigate(`/cthulhu/${action.page}`);
+    }
+  };
+
   return (
     <div className={classes.page}>
       <p className={classes.title}>{page}</p>
       <p className={classes.text}>{text}</p>
       {context ? <p className={`${classes.text} ${classes.context}`}>{context}</p> : null}
-      {choices.map((choice) => (
-        <div className={classes.button} onClick={() => onChoice(choice)} key={choice.label}>
-          {choice.label}
-        </div>
-      ))}
+      {choices.map((choice) =>
+        choice.input ? (
+          <input
+            className={classes.input}
+            type="text"
+            placeholder={choice.label}
+            onChange={onInputChange(choice.input)}
+            onKeyDown={onInputSubmit(choice.actions[0])}
+            key={choice.label}
+          />
+        ) : (
+          <div className={classes.button} onClick={() => onChoice(choice)} key={choice.label}>
+            {choice.label}
+          </div>
+        )
+      )}
     </div>
   );
 };
