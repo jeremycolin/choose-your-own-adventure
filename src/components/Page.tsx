@@ -1,9 +1,11 @@
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
+import { useScrollToTop } from "../utils/use-scroll-to-top";
 import classes from "./page.module.css";
 
 export const Page = () => {
+  useScrollToTop();
   const { text, context, choices } = useLoaderData() as PageData;
   const { page } = useParams();
   const navigate = useNavigate();
