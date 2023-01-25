@@ -24,7 +24,7 @@ export const Page = () => {
     if (action.profession) {
       createCharacter(action.profession);
     }
-    navigate(`/book/${action.page}`);
+    navigate(`/cthulhu/${action.page}`);
   };
 
   return (
