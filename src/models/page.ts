@@ -4,8 +4,8 @@ export interface Action {
   condition?: (character: Character) => boolean;
   page: string;
   profession?: Profession;
-  effect?: (character: Character) => void;
-  status?: "failure" | "success";
+  sideEffect?: (character: Character) => void;
+  effect?: "failure" | "success";
 }
 
 export interface Choice {

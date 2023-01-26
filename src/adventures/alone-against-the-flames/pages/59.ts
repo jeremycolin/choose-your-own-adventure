@@ -9,7 +9,7 @@ export const page: PageData = {
       actions: [
         {
           page: "71",
-          effect: (character: Character) => {
+          sideEffect: (character: Character) => {
             character.hitPoints = character.hitPoints - 1;
           },
         },

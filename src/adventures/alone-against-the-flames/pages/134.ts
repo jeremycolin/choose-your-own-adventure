@@ -6,8 +6,8 @@ export const page: PageData = {
     {
       label: "Try to hold on to something",
       actions: [
-        { page: "261", condition: (character) => character.normalRoll("dexterity"), status: "success" },
-        { page: "59", status: "failure" },
+        { page: "261", condition: (character) => character.normalRoll("dexterity"), effect: "success" },
+        { page: "59", effect: "failure" },
       ],
     },
   ],

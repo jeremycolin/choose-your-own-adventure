@@ -22,17 +22,18 @@
   bottom: 0;
   z-index: -1;
   width: 0;
-  transition: width 300ms ease;
+  opacity: 60%;
+  transition: width 500ms ease;
 }
 
 .button.success::before {
   width: 100%;
-  background-color: #cbe896;
+  background-color: #a5d6a7;
 }
 
 .button.failure::before {
   width: 100%;
-  background-color: #89002e;
+  background-color: #ef9a9a;
 }
 
 .button.neutral::before {

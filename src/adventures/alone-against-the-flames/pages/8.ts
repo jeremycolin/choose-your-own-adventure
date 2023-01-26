@@ -6,8 +6,8 @@ export const page: PageData = {
     {
       label: "Try to put your cases on the rack",
       actions: [
-        { page: "23", condition: (character) => character.size <= 40 },
-        { page: "38", condition: (character) => character.size > 40 },
+        { page: "23", condition: (character) => character.size <= 40, effect: "success" },
+        { page: "38", condition: (character) => character.size > 40, effect: "failure" },
       ],
     },
   ],

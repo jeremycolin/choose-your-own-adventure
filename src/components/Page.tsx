@@ -13,8 +13,8 @@ export const Page = () => {
   const { page } = useParams();
   const navigate = useNavigate();
   const { character, createCharacter } = useCharacter();
-  const [choiceEffect, setChoiceEffect] = useState<{ status: "failure" | "success" | "neutral"; label: string }>({
-    status: "neutral",
+  const [choiceEffect, setChoiceEffect] = useState<{ effect: "failure" | "success" | "neutral"; label: string }>({
+    effect: "neutral",
     label: "",
   });
 
@@ -37,10 +37,10 @@ export const Page = () => {
       createCharacter(action.profession);
     }
 
-    setChoiceEffect({ label: choice.label, status: action.status ?? "neutral" });
+    setChoiceEffect({ label: choice.label, effect: action.effect ?? "neutral" });
     e.target.addEventListener("transitionend", () => {
       navigate(`/cthulhu/${action.page}`);
-      setChoiceEffect({ status: "neutral", label: "" });
+      setChoiceEffect({ effect: "neutral", label: "" });
     });
   };
 
@@ -61,7 +61,7 @@ export const Page = () => {
     }
   };
 
-  const { status, label } = choiceEffect;
+  const { effect, label } = choiceEffect;
   return (
     <div className={classes.page}>
       <p className={classes.title}>{page}</p>
@@ -80,9 +80,9 @@ export const Page = () => {
         ) : (
           <button
             className={cx(buttonClasses.button, {
-              [buttonClasses.success]: status === "success" && label === choice.label,
-              [buttonClasses.neutral]: status === "neutral" && label === choice.label,
-              [buttonClasses.failure]: status === "failure" && label === choice.label,
+              [buttonClasses.success]: effect === "success" && label === choice.label,
+              [buttonClasses.neutral]: effect === "neutral" && label === choice.label,
+              [buttonClasses.failure]: effect === "failure" && label === choice.label,
             })}
             onClick={onChoice(choice)}
             key={choice.label}
