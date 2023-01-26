@@ -12,7 +12,7 @@ export const Page = () => {
   const navigate = useNavigate();
   const { character, createCharacter } = useCharacter();
 
-  const onChoice = (choice: Choice) => (e: MouseEvent<HTMLDivElement>) => {
+  const onChoice = (choice: Choice) => (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -43,11 +43,10 @@ export const Page = () => {
   };
 
   const onInputSubmit = (action: Action) => (e: KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
     if (e.key === "Enter") {
       navigate(`/cthulhu/${action.page}`);
+      e.preventDefault();
+      e.stopPropagation();
     }
   };
 
@@ -67,9 +66,9 @@ export const Page = () => {
             key={choice.label}
           />
         ) : (
-          <div className={classes.button} onClick={onChoice(choice)} key={choice.label}>
+          <button className={classes.button} onClick={onChoice(choice)} key={choice.label}>
             {choice.label}
-          </div>
+          </button>
         )
       )}
     </div>
