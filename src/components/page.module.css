@@ -23,19 +23,6 @@
   padding: 20px;
 }
 
-.button {
-  font-size: 20px;
-  width: calc(100% - 48px);
-  margin: 20px 20px 0 20px;
-  height: 40px;
-  border: 2px solid #b17a6c;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-  background-color: #f5f0eb;
-  font-family: "EB Garamond";
-}
-
 .input {
   font-size: 19px;
   width: calc(100% - 48px);

@@ -1,9 +1,11 @@
-import { ChangeEvent, KeyboardEvent, MouseEvent } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useRef, useState } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
+import cx from "classnames";
 import { Action, Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
 import { useScrollToTop } from "../utils/use-scroll-to-top";
 import classes from "./page.module.css";
+import buttonClasses from "./button.module.css";
 
 export const Page = () => {
   useScrollToTop();
@@ -11,6 +13,10 @@ export const Page = () => {
   const { page } = useParams();
   const navigate = useNavigate();
   const { character, createCharacter } = useCharacter();
+  const [choiceEffect, setChoiceEffect] = useState<{ status: "failure" | "success" | "neutral"; label: string }>({
+    status: "neutral",
+    label: "",
+  });
 
   const onChoice = (choice: Choice) => (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -30,7 +36,12 @@ export const Page = () => {
     if (action.profession) {
       createCharacter(action.profession);
     }
-    navigate(`/cthulhu/${action.page}`);
+
+    setChoiceEffect({ label: choice.label, status: action.status ?? "neutral" });
+    e.target.addEventListener("transitionend", () => {
+      navigate(`/cthulhu/${action.page}`);
+      setChoiceEffect({ status: "neutral", label: "" });
+    });
   };
 
   const onInputChange = (input: "name") => (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +61,7 @@ export const Page = () => {
     }
   };
 
+  const { status, label } = choiceEffect;
   return (
     <div className={classes.page}>
       <p className={classes.title}>{page}</p>
@@ -66,7 +78,15 @@ export const Page = () => {
             key={choice.label}
           />
         ) : (
-          <button className={classes.button} onClick={onChoice(choice)} key={choice.label}>
+          <button
+            className={cx(buttonClasses.button, {
+              [buttonClasses.success]: status === "success" && label === choice.label,
+              [buttonClasses.neutral]: status === "neutral" && label === choice.label,
+              [buttonClasses.failure]: status === "failure" && label === choice.label,
+            })}
+            onClick={onChoice(choice)}
+            key={choice.label}
+          >
             {choice.label}
           </button>
         )

@@ -5,7 +5,10 @@ export const page: PageData = {
   choices: [
     {
       label: "Try to hold on to something",
-      actions: [{ page: "261", condition: (character) => character.normalRoll("dexterity") }, { page: "59" }],
+      actions: [
+        { page: "261", condition: (character) => character.normalRoll("dexterity"), status: "success" },
+        { page: "59", status: "failure" },
+      ],
     },
   ],
 };

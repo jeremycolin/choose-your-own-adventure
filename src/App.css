@@ -1,0 +1,10 @@
+body {
+  font-family: "EB Garamond", sans-serif;
+  background-color: #efe6dd;
+}
+
+html,
+body,
+div#root {
+  min-height: 100vh;
+}

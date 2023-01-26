@@ -1,15 +1,6 @@
 body {
-  margin: 0;
-  font-family: "EB Garamond", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #efe6dd;
-}
-
-html,
-body,
-div#root {
-  min-height: 100vh;
 }
 
 html,
