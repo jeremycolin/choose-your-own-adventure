@@ -5,7 +5,7 @@ import { PageData } from "./models/page";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello World</div>,
+    element: <div>Hey</div>,
   },
   {
     path: "cthulhu/:page",
