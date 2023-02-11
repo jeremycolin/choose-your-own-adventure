@@ -11,7 +11,7 @@ export const Page = () => {
   useScrollToTop();
   const { title, text, context, choices } = useLoaderData() as PageData;
   const navigate = useNavigate();
-  const { character, createCharacter } = useCharacter();
+  const { character, createCharacter, setProfession } = useCharacter();
   const [choiceEffect, setChoiceEffect] = useState<{ effect: "failure" | "success" | "neutral"; label: string }>({
     effect: "neutral",
     label: "",
@@ -34,6 +34,8 @@ export const Page = () => {
     }
     if (action.archetype) {
       createCharacter(action.archetype);
+    } else if (action.profession) {
+      setProfession(action.profession);
     }
 
     setChoiceEffect({ label: choice.label, effect: action.effect ?? "neutral" });

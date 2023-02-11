@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Agile, Archetype, Character, Smart, Strong } from "./character";
+import { Agile, Archetype, Character, Profession, Smart, Strong } from "./character";
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState<Character>();
@@ -21,5 +21,9 @@ export const useCharacter = () => {
     }
   };
 
-  return { character, createCharacter };
+  const setProfession = (profession: Profession) => {
+    character?.setProfession(profession);
+  };
+
+  return { character, createCharacter, setProfession };
 };
