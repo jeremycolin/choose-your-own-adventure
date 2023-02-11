@@ -1,5 +1,5 @@
 import { ChangeEvent, KeyboardEvent, MouseEvent, useRef, useState } from "react";
-import { useLoaderData, useParams, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import cx from "classnames";
 import { Action, Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
@@ -9,8 +9,7 @@ import buttonClasses from "./button.module.css";
 
 export const Page = () => {
   useScrollToTop();
-  const { text, context, choices } = useLoaderData() as PageData;
-  const { page } = useParams();
+  const { title, text, context, choices } = useLoaderData() as PageData;
   const navigate = useNavigate();
   const { character, createCharacter } = useCharacter();
   const [choiceEffect, setChoiceEffect] = useState<{ effect: "failure" | "success" | "neutral"; label: string }>({
@@ -33,8 +32,8 @@ export const Page = () => {
       console.error("Could not find any possible actions, we're stuck here :(");
       return;
     }
-    if (action.profession) {
-      createCharacter(action.profession);
+    if (action.archetype) {
+      createCharacter(action.archetype);
     }
 
     setChoiceEffect({ label: choice.label, effect: action.effect ?? "neutral" });
@@ -64,7 +63,7 @@ export const Page = () => {
   const { effect, label } = choiceEffect;
   return (
     <div className={classes.page}>
-      <p className={classes.title}>{page}</p>
+      <p className={classes.title}>{title}</p>
       <p className={classes.text}>{text}</p>
       {context ? <p className={`${classes.text} ${classes.context}`}>{context}</p> : null}
       {choices.map((choice) =>

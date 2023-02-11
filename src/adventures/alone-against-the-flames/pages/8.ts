@@ -1,6 +1,7 @@
 import { PageData } from "../../../models/page";
 
 export const page: PageData = {
+  title: "8",
   text: "The driver smokes and watches as you drag your cases to the back of the motor coach. The rack is set inconveniently high on the vehicle. You get a grip on the heavier case.",
   choices: [
     {

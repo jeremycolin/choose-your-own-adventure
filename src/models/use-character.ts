@@ -1,21 +1,21 @@
 import { useState } from "react";
-import { Character, Detective, Gangster, Journalist, Profession } from "./character";
+import { Agile, Archetype, Character, Smart, Strong } from "./character";
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState<Character>();
 
-  const createCharacter = (profession: Profession) => {
-    switch (profession) {
-      case "journalist": {
-        setCharacter(new Journalist());
+  const createCharacter = (archetype: Archetype) => {
+    switch (archetype) {
+      case "smart": {
+        setCharacter(new Smart());
         break;
       }
-      case "detective": {
-        setCharacter(new Detective());
+      case "agile": {
+        setCharacter(new Agile());
         break;
       }
-      case "gangster": {
-        setCharacter(new Gangster());
+      case "strong": {
+        setCharacter(new Strong());
         break;
       }
     }

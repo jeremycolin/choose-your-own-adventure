@@ -1,4 +1,5 @@
-export type Profession = "journalist" | "detective" | "gangster";
+export type Archetype = "smart" | "agile" | "strong";
+export type Profession = "antiquarian" | "doctor" | "journalist" | "private investigator" | "professor";
 
 const roll = (base = 100) => Math.floor(Math.random() * base) + 1;
 
@@ -19,8 +20,11 @@ export class Character {
   public intelligence: number;
   public education: number;
 
-  public hitPoints: number;
   public luck: number;
+
+  public sanity: number;
+  public hitPoints: number;
+  public magicPoints: number;
 
   public name: string;
 
@@ -52,8 +56,11 @@ export class Character {
     this.intelligence = intelligence;
     this.education = education;
 
-    this.hitPoints = Math.floor((this.size + this.constitution) / 10);
     this.luck = droll(3)(6) * 5;
+
+    this.sanity = this.power;
+    this.hitPoints = Math.floor((this.size + this.constitution) / 10);
+    this.magicPoints = Math.floor(this.power);
 
     this.name = "";
   }
@@ -65,22 +72,37 @@ export class Character {
   extremeRoll = (characteristic: Characteristic) => roll() <= this[characteristic] / 5;
 }
 
-export class Journalist extends Character {
+export class Smart extends Character {
   constructor() {
     super({
       strength: 40,
       constitution: 50,
       power: 60,
-      dexterity: 50,
+      dexterity: 30,
       appearance: 50,
-      size: 30,
-      intelligence: 70,
-      education: 80,
+      size: 50,
+      intelligence: 80,
+      education: 70,
     });
   }
 }
 
-export class Gangster extends Character {
+export class Agile extends Character {
+  constructor() {
+    super({
+      strength: 30,
+      constitution: 50,
+      power: 50,
+      dexterity: 80,
+      appearance: 70,
+      size: 40,
+      intelligence: 60,
+      education: 50,
+    });
+  }
+}
+
+export class Strong extends Character {
   constructor() {
     super({
       strength: 80,
@@ -89,23 +111,8 @@ export class Gangster extends Character {
       dexterity: 50,
       appearance: 50,
       size: 60,
-      intelligence: 50,
+      intelligence: 30,
       education: 40,
-    });
-  }
-}
-
-export class Detective extends Character {
-  constructor() {
-    super({
-      strength: 50,
-      constitution: 40,
-      power: 50,
-      dexterity: 70,
-      appearance: 60,
-      size: 50,
-      intelligence: 80,
-      education: 50,
     });
   }
 }
