@@ -73,7 +73,9 @@ export class Character {
 
   sanity: number;
   hitPoints: number;
+  maxHitPoints: number;
   magicPoints: number;
+  maxMagicPoints: number;
 
   name: string;
   profession?: Profession;
@@ -128,6 +130,8 @@ export class Character {
   pharmacy = 0;
   photographhy = 0;
 
+  prerequisites: string[] = [];
+
   constructor({
     strength,
     constitution,
@@ -160,7 +164,9 @@ export class Character {
 
     this.sanity = this.power;
     this.hitPoints = Math.floor((this.size + this.constitution) / 10);
+    this.maxHitPoints = this.hitPoints;
     this.magicPoints = Math.floor(this.power);
+    this.maxMagicPoints = this.magicPoints;
 
     this.dodge = Math.floor(dexterity / 2);
     this.ownLanguage = this.education;
@@ -244,6 +250,16 @@ export class Character {
       }
     }
   };
+
+  setHitPoints(hitPoints: number) {
+    this.hitPoints = Math.min(hitPoints, this.maxHitPoints);
+
+    // TODO if this.hitPoints <= 0
+  }
+
+  hasPrerequisite(prerequisite: string) {
+    return this.prerequisites.includes(prerequisite);
+  }
 }
 
 export class Smart extends Character {

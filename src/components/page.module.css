@@ -36,7 +36,6 @@
 
 input::placeholder {
   opacity: 0.5;
-  font-style: italic;
 }
 
 .input:focus {

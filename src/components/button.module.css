@@ -1,7 +1,7 @@
 .button {
   font-size: 20px;
   width: calc(100% - 48px);
-  margin: 20px 20px 0 20px;
+  margin: 16px 20px 0 20px;
   height: 40px;
   border: 2px solid #b17a6c;
   border-radius: 8px;
@@ -11,6 +11,7 @@
   font-family: "EB Garamond";
   position: relative;
   background: none;
+  cursor: pointer;
 }
 
 .button::before {

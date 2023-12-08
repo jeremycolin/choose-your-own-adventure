@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Agile, Archetype, Character, Profession, Smart, Strong } from "./character";
 
 export const useCharacter = () => {
-  const [character, setCharacter] = useState<Character>();
+  const [character, setCharacter] = useState<Character>(new Smart()); // TODO revisit initial character
 
   const createCharacter = (archetype: Archetype) => {
     switch (archetype) {

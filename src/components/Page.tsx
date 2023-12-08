@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import cx from "classnames";
 import { Action, Choice, PageData } from "../models/page";
 import { useCharacter } from "../models/use-character";
-import { useScrollToTop } from "../utils/use-scroll-to-top";
+import { useScrollToTop } from "../use-scroll-to-top";
 import classes from "./page.module.css";
 import buttonClasses from "./button.module.css";
 
@@ -22,7 +22,7 @@ export const Page = () => {
     e.stopPropagation();
 
     const action = choice.actions.find((action) => {
-      if (!action.condition || !character) {
+      if (!action.condition) {
         // if condition is not defined, action is selected
         return true;
       }
@@ -68,17 +68,22 @@ export const Page = () => {
       <p className={classes.title}>{title}</p>
       <p className={classes.text}>{text}</p>
       {context ? <p className={`${classes.text} ${classes.context}`}>{context}</p> : null}
-      {choices.map((choice) =>
-        choice.input ? (
-          <input
-            className={classes.input}
-            type="text"
-            placeholder={choice.label}
-            onChange={onInputChange(choice.input)}
-            onKeyDown={onInputSubmit(choice.actions[0])}
-            key={choice.label}
-          />
-        ) : (
+      {choices.map((choice) => {
+        if (choice.prerequisite && !character.hasPrerequisite(choice.prerequisite)) {
+          return null;
+        } else if (choice.input) {
+          return (
+            <input
+              className={classes.input}
+              type="text"
+              placeholder={choice.label}
+              onChange={onInputChange(choice.input)}
+              onKeyDown={onInputSubmit(choice.actions[0])}
+              key={choice.label}
+            />
+          );
+        }
+        return (
           <button
             className={cx(buttonClasses.button, {
               [buttonClasses.success]: effect === "success" && label === choice.label,
@@ -90,8 +95,8 @@ export const Page = () => {
           >
             {choice.label}
           </button>
-        )
-      )}
+        );
+      })}
     </div>
   );
 };

@@ -12,6 +12,7 @@ export interface Action {
 export interface Choice {
   label: string;
   input?: "name";
+  prerequisite?: string; // some choices are only available if you have done certain actions before
   actions: Array<Action>;
 }
 

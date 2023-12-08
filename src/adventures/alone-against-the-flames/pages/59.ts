@@ -1,4 +1,3 @@
-import { Character } from "../../../models/character";
 import { PageData } from "../../../models/page";
 
 export const page: PageData = {
@@ -10,9 +9,7 @@ export const page: PageData = {
       actions: [
         {
           page: "71",
-          sideEffect: (character: Character) => {
-            character.hitPoints = character.hitPoints - 1;
-          },
+          sideEffect: (character) => character.setHitPoints(character.hitPoints - 1),
         },
       ],
     },
