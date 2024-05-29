@@ -6,7 +6,7 @@ import "./App.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hey</div>,
+    element: null,
   },
   {
     path: "cthulhu/:page",

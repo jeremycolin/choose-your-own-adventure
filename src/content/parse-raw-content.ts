@@ -1,12 +1,12 @@
 import { Choice, PageData } from "../models/page";
-import { raw } from "./raw";
+import { raw } from "./raw.js";
 import { mkdirSync, rmdirSync, writeFileSync } from "fs";
 
 const OUTPUT_DIR = "./src/adventures/alone-against-the-flames/generated-pages/";
 
 function parseContent() {
   rmdirSync(OUTPUT_DIR, { recursive: true });
-  mkdirSync(OUTPUT_DIR);
+  mkdirSync(OUTPUT_DIR, { recursive: true });
 
   // split pages, ignoring START line
   const splitted = raw.split(/\n(\d{1,3})\n/g).slice(1);

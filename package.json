@@ -2,10 +2,12 @@
   "name": "choose-your-own-adventure-book",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "content:gen": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/content/parse-raw-content.ts"
   },
   "dependencies": {
     "classnames": "^2.5.1",
